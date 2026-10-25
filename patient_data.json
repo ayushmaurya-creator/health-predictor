@@ -1,0 +1,16 @@
+{
+  "name": "Kavita Singh",
+  "age": 58,
+  "gender": "Female",
+  "sugar": 185,
+  "bp": 155,
+  "hb": 10.5,
+  "wbc": 8500,
+  "platelets": 210000,
+  "cholesterol": 240,
+  "triglycerides": 190,
+  "creatinine": 2.3,
+  "urea": 42,
+  "sgpt": 45,
+  "bilirubin": 0.9
+}

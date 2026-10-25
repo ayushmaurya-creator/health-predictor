@@ -1,0 +1,304 @@
+:root {
+  --bg-color: #f4f7f6;
+  --card-bg: #ffffff;
+  --text-main: #2c3e50;
+  --text-muted: #7f8c8d;
+  --border-color: #ecf0f1;
+}
+
+/* dark mode ke liye*/
+body.dark-mode {
+  --bg-color: #121212;
+  --card-bg: #1e1e1e;
+  --text-main: #e0e0e0;
+  --text-muted: #aaaaaa;
+  --border-color: #333333;
+}
+
+/*elements ka default style reset karna */
+* { 
+  box-sizing: border-box; 
+  margin: 0; 
+  padding: 0; 
+  font-family: 'Segoe UI', Tahoma, Geneva, sans-serif; 
+}
+
+/* body aur smooth transition */
+body { 
+  background-color: var(--bg-color); 
+  color: var(--text-main); 
+  transition: all 0.3s ease-in-out; 
+}
+
+/* navbar (Upar ki patti)*/
+.navbar { 
+  background: linear-gradient(135deg, #1e3c72, #2a5298); 
+  padding: 15px 25px; 
+  color: white; 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.nav-controls { 
+  display: flex; 
+  align-items: center; 
+  gap: 15px; 
+}
+
+.btn-theme { 
+  background: #34495e; 
+  color: white; 
+  border: none; 
+  padding: 8px 15px; 
+  border-radius: 8px; 
+  cursor: pointer; 
+  transition: 0.3s;
+}
+
+.btn-theme:hover {
+  background: #2c3e50;
+}
+
+/*main layout aur cards */
+.main-container { 
+  width: 95%; 
+  max-width: 1150px; 
+  margin: 25px auto; 
+}
+
+.content-wrapper { 
+  display: flex; 
+  gap: 25px; 
+}
+
+/* form aur results */
+.card { 
+  background-color: var(--card-bg); 
+  padding: 25px; 
+  border-radius: 12px; 
+  flex: 1; 
+  border: 1px solid var(--border-color); 
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+/* Form me scroll ke liye */
+.form-card { 
+  max-height: 80vh; 
+  overflow-y: auto; 
+  border-top: 4px solid #3498db; 
+}
+
+/* form elements */
+h3, h4 { 
+  color: var(--text-main); 
+}
+
+.section-title { 
+  margin: 15px 0 10px; 
+  background: var(--border-color); 
+  padding: 8px 12px; 
+  border-radius: 6px; 
+  font-size: 14px; 
+}
+
+.input-row { 
+  display: flex; 
+  gap: 12px; 
+  flex-wrap: wrap; 
+  margin-bottom: 10px; 
+}
+
+.input-group { 
+  flex: 1; 
+  min-width: 100px; 
+}
+
+.input-group label { 
+  display: block; 
+  font-size: 12px; 
+  font-weight: 600; 
+  color: var(--text-muted); 
+  margin-bottom: 5px; 
+}
+
+.input-group input, 
+.input-group select { 
+  width: 100%; 
+  padding: 10px; 
+  border: 1px solid var(--border-color); 
+  background: var(--bg-color); 
+  color: var(--text-main); 
+  border-radius: 6px; 
+  transition: 0.3s;
+}
+
+/* input glow effect */
+.input-group input:focus {
+  border-color: #3498db;
+  outline: none;
+  box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+}
+
+/*buttons style*/
+.demo-section { 
+  background: var(--card-bg); 
+  padding: 15px; 
+  border-radius: 10px; 
+  margin-bottom: 20px; 
+  text-align: center; 
+  border: 1px solid var(--border-color); 
+}
+
+.btn-demo { 
+  border: none; 
+  padding: 10px 18px; 
+  margin: 5px; 
+  border-radius: 20px; 
+  cursor: pointer; 
+  color: white; 
+  font-weight: bold; 
+  transition: transform 0.2s;
+}
+
+.btn-demo:hover {
+  transform: translateY(-2px); /* button thoda upar uthega */
+}
+
+.safe-btn { background: #2ecc71; } 
+.danger-btn { background: #e74c3c; } 
+.upload-btn { background: #9b59b6; display: inline-block; cursor: pointer; }
+
+
+.btn-primary, 
+.btn-secondary, 
+.btn-print { 
+  width: 100%; 
+  padding: 14px; 
+  border: none; 
+  border-radius: 8px; 
+  cursor: pointer; 
+  font-weight: bold; 
+  margin-top: 10px; 
+  font-size: 15px;
+}
+
+.btn-primary { 
+  background: #3498db; 
+  color: white; 
+} 
+
+.btn-secondary { 
+  background: var(--border-color); 
+  color: var(--text-main); 
+} 
+
+.btn-print { 
+  background: #9b59b6; 
+  color: white; 
+}
+
+/* results aur Alerts */
+.result-header p { 
+  padding: 12px; 
+  background: var(--border-color); 
+  border-radius: 6px; 
+  border-left: 5px solid #3498db; 
+  font-weight: bold; 
+  margin-bottom: 15px;
+}
+
+/* safe ya danger status banner */
+.status-banner { 
+  padding: 15px; 
+  text-align: center; 
+  font-weight: bold; 
+  border-radius: 8px; 
+  margin: 15px 0; 
+  transition: 0.3s;
+}
+
+/* jab combinations danger honge tab alert box dikhega */
+.warning-box { 
+  background: #fcf3cf; 
+  color: #b9770e; 
+  padding: 15px; 
+  border-left: 5px solid #f1c40f; 
+  border-radius: 8px; 
+  margin-bottom: 15px; 
+  line-height: 1.5;
+}
+
+/* emergency buttons ka panel */
+.action-panel { 
+  display: flex; 
+  gap: 10px; 
+  margin-bottom: 20px; 
+}
+
+.btn-action { 
+  flex: 1; 
+  padding: 12px; 
+  border: none; 
+  border-radius: 6px; 
+  color: white; 
+  cursor: pointer; 
+  font-weight: bold; 
+}
+
+.bg-red { background: #e74c3c; } 
+.bg-blue { background: #2980b9; }
+
+/*   Lists aur Text Colors */
+.details-section ul {
+  list-style: none;
+}
+
+.details-section li { 
+  padding: 10px 0; 
+  border-bottom: 1px dashed var(--border-color); 
+  display: flex; 
+  justify-content: space-between; 
+}
+
+.text-high { color: #e74c3c; font-weight: bold; } 
+.text-low { color: #f39c12; font-weight: bold; } 
+.text-normal { color: #27ae60; font-weight: bold; }
+
+/* print Fformatting (paper pe kaisa dikhega)*/
+@media print { 
+  body { 
+    background: white; 
+    color: black; 
+  } 
+  
+  /* print karte time faltu buttons chupaa do */
+  .navbar, 
+  .demo-section, 
+  .form-card, 
+  .btn-print, 
+  .action-panel { 
+    display: none !important; 
+  } 
+  
+  .content-wrapper { 
+    display: block; 
+  } 
+  
+  .result-card { 
+    border: none; 
+    box-shadow: none;
+  } 
+}
+
+/* mobile view (chhote screens ke liye)*/
+@media (max-width: 768px) { 
+  .content-wrapper { 
+    flex-direction: column; 
+  } 
+  
+  .form-card { 
+    max-height: none; 
+  } 
+}

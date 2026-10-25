@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Health Predictor</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- upar ka navbar aur dark mode Button -->
+  <div class="navbar">
+    <h2>🏥 Health Predictor</h2>
+    <div class="nav-controls">
+      <p>Intelligent Clinical Checker</p>
+      <button id="themeToggle" class="btn-theme" onclick="toggleTheme()">🌙 Dark Mode</button>
+    </div>
+  </div>
+
+  <div class="main-container">
+    
+    <!-- quick demo aur File upload buttons -->
+    <div class="demo-section">
+      <p><b>Live Demo Panel:</b></p>
+      <button class="btn-demo safe-btn" onclick="fillNormal()">🟢 Normal</button>
+      <button class="btn-demo danger-btn" onclick="fillHeartLiverRisk()">🔴 Heart/Liver</button>
+      <span class="upload-wrapper">
+        <label for="jsonUpload" class="btn-demo upload-btn">📁 Upload E-Report (JSON)</label>
+        <input type="file" id="jsonUpload" accept=".json" style="display: none;" onchange="handleFileUpload(event)">
+      </span>
+    </div>
+
+    <!-- main area -->
+    <div class="content-wrapper">
+      
+      <!-- left: form jahan patient ki details aayengi -->
+      <div class="card form-card">
+        <h3>📝 Patient Details & Labs</h3>
+        
+        <h4 class="section-title">👤 Patient Information</h4>
+        <div class="input-row">
+          <div class="input-group"><label>Name:</label><input type="text" id="pName" placeholder="Name"></div>
+          <div class="input-group"><label>Age:</label><input type="number" id="pAge" placeholder="Age"></div>
+          <div class="input-group">
+            <label>Gender:</label>
+            <select id="pGender"><option>Male</option><option>Female</option></select>
+          </div>
+        </div>
+
+        <h4 class="section-title">🩸 Basic & Blood Profile</h4>
+        <div class="input-row">
+          <div class="input-group"><label>Sugar [mg/dL]:</label><input type="number" id="sugar" placeholder="70-100"></div>
+          <div class="input-group"><label>BP [mmHg]:</label><input type="number" id="bp" placeholder="90-120"></div>
+          <div class="input-group"><label>Hb [g/dL]:</label><input type="number" id="hb" placeholder="12-16"></div>
+        </div>
+        <div class="input-row">
+          <div class="input-group"><label>WBC [/mcL]:</label><input type="number" id="wbc" placeholder="4500-11000"></div>
+          <div class="input-group"><label>Platelets:</label><input type="number" id="platelets" placeholder="150k-450k"></div>
+        </div>
+
+        <h4 class="section-title">❤️ Heart & Kidney & Liver</h4>
+        <div class="input-row">
+          <div class="input-group"><label>Cholesterol:</label><input type="number" id="cholesterol" placeholder="<200"></div>
+          <div class="input-group"><label>Triglycerides:</label><input type="number" id="triglycerides" placeholder="<150"></div>
+        </div>
+        <div class="input-row">
+          <div class="input-group"><label>Creatinine:</label><input type="number" id="creatinine" step="0.1"></div>
+          <div class="input-group"><label>Urea:</label><input type="number" id="urea"></div>
+        </div>
+        <div class="input-row">
+          <div class="input-group"><label>SGPT:</label><input type="number" id="sgpt"></div>
+          <div class="input-group"><label>Bilirubin:</label><input type="number" id="bilirubin" step="0.1"></div>
+        </div>
+
+        <!-- submit aur clear buttons -->
+        <button class="btn-primary" onclick="checkReport()">🔍 Analyze Report</button>
+        <button class="btn-secondary" onclick="clearForm()">🗑️ Clear</button>
+      </div>
+
+      <!--right: output results yahan dikhenge -->
+      <div class="card result-card" id="printableArea">
+        <div class="result-header">
+          <h3>🩺 Clinical Analysis</h3>
+          <p id="patientInfoDisplay">Patient Data Pending...</p>
+        </div>
+        
+        <!-- status batane wala banner (red, green ya yellow) -->
+        <div id="statusBanner" class="status-banner">Awaiting test values...</div>
+        
+        <!-- dangerous combinations ka alert box -->
+        <div id="warningBox" class="warning-box" style="display: none;"></div>
+
+        <!-- emergency action button -->
+        <div id="actionPanel" class="action-panel" style="display: none;">
+          <button class="btn-action bg-red" onclick="alert('ICU Alert Sent to nearest terminal!')">🚨 Alert Emergency Ward</button>
+          <button class="btn-action bg-blue" onclick="alert('Referral Letter Drafted.')">📄 Generate Specialist Referral</button>
+        </div>
+
+        <div class="details-section">
+          <ul id="testList"><li>No data checked yet.</li></ul>
+        </div>
+        
+        <button id="printBtn" class="btn-print" style="display:none;" onclick="window.print()">🖨️ Print Final Report</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
