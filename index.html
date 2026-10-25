@@ -3,48 +3,48 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Health Predictor</title>
+  <title>MediPulse AI - Advanced Pro</title>
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body onload="loadHistory()">
 
-  <!-- upar ka navbar aur dark mode Button -->
   <div class="navbar">
-    <h2>🏥 Health Predictor</h2>
+    <h2>🏥 MediPulse AI Analyzer</h2>
     <div class="nav-controls">
-      <p>Intelligent Clinical Checker</p>
       <button id="themeToggle" class="btn-theme" onclick="toggleTheme()">🌙 Dark Mode</button>
     </div>
   </div>
 
   <div class="main-container">
     
-    <!-- quick demo aur File upload buttons -->
     <div class="demo-section">
-      <p><b>Live Demo Panel:</b></p>
-      <button class="btn-demo safe-btn" onclick="fillNormal()">🟢 Normal</button>
-      <button class="btn-demo danger-btn" onclick="fillHeartLiverRisk()">🔴 Heart/Liver</button>
+      <p><b>Judges Live Demo Panel:</b></p>
+      <button class="btn-demo safe-btn" onclick="fillNormal()">🟢 Normal Patient</button>
+      <button class="btn-demo danger-btn" onclick="fillRisk()">🔴 High Risk (Metabolic & Anemia)</button>
       <span class="upload-wrapper">
         <label for="jsonUpload" class="btn-demo upload-btn">📁 Upload E-Report (JSON)</label>
         <input type="file" id="jsonUpload" accept=".json" style="display: none;" onchange="handleFileUpload(event)">
       </span>
     </div>
 
-    <!-- main area -->
     <div class="content-wrapper">
       
-      <!-- left: form jahan patient ki details aayengi -->
+      <!-- left side: form fields -->
       <div class="card form-card">
         <h3>📝 Patient Details & Labs</h3>
         
-        <h4 class="section-title">👤 Patient Information</h4>
+        <h4 class="section-title">👤 Patient Info & Vitals</h4>
         <div class="input-row">
-          <div class="input-group"><label>Name:</label><input type="text" id="pName" placeholder="Name"></div>
-          <div class="input-group"><label>Age:</label><input type="number" id="pAge" placeholder="Age"></div>
+          <div class="input-group"><label>Name:</label><input type="text" id="pName" placeholder="e.g. Ramesh"></div>
+          <div class="input-group"><label>Age:</label><input type="number" id="pAge" placeholder="e.g. 45"></div>
           <div class="input-group">
             <label>Gender:</label>
             <select id="pGender"><option>Male</option><option>Female</option></select>
           </div>
+        </div>
+        <div class="input-row">
+          <div class="input-group"><label>Height [cm]:</label><input type="number" id="height" placeholder="e.g. 170"></div>
+          <div class="input-group"><label>Weight [kg]:</label><input type="number" id="weight" placeholder="e.g. 70"></div>
         </div>
 
         <h4 class="section-title">🩸 Basic & Blood Profile</h4>
@@ -58,42 +58,54 @@
           <div class="input-group"><label>Platelets:</label><input type="number" id="platelets" placeholder="150k-450k"></div>
         </div>
 
-        <h4 class="section-title">❤️ Heart & Kidney & Liver</h4>
+        <h4 class="section-title">❤️ Heart, Kidney & Liver</h4>
         <div class="input-row">
-          <div class="input-group"><label>Cholesterol:</label><input type="number" id="cholesterol" placeholder="<200"></div>
-          <div class="input-group"><label>Triglycerides:</label><input type="number" id="triglycerides" placeholder="<150"></div>
-        </div>
-        <div class="input-row">
-          <div class="input-group"><label>Creatinine:</label><input type="number" id="creatinine" step="0.1"></div>
-          <div class="input-group"><label>Urea:</label><input type="number" id="urea"></div>
-        </div>
-        <div class="input-row">
-          <div class="input-group"><label>SGPT:</label><input type="number" id="sgpt"></div>
-          <div class="input-group"><label>Bilirubin:</label><input type="number" id="bilirubin" step="0.1"></div>
+          <div class="input-group"><label>Cholesterol:</label><input type="number" id="cholesterol" placeholder="< 200"></div>
+          <div class="input-group"><label>Creatinine:</label><input type="number" id="creatinine" step="0.1" placeholder="0.6-1.2"></div>
+          <div class="input-group"><label>SGPT:</label><input type="number" id="sgpt" placeholder="7-56"></div>
         </div>
 
-        <!-- submit aur clear buttons -->
-        <button class="btn-primary" onclick="checkReport()">🔍 Analyze Report</button>
+        <h4 class="section-title">💊 Vitamins & Minerals</h4>
+        <div class="input-row">
+          <div class="input-group"><label>Vitamin D [ng/mL]:</label><input type="number" id="vitd" placeholder="> 20"></div>
+          <div class="input-group"><label>Vit B12 [pg/mL]:</label><input type="number" id="vitb12" placeholder="> 200"></div>
+        </div>
+        <div class="input-row">
+          <div class="input-group"><label>Iron [mcg/dL]:</label><input type="number" id="iron" placeholder="60-170"></div>
+          <div class="input-group"><label>Calcium [mg/dL]:</label><input type="number" id="calcium" step="0.1" placeholder="8.5-10.2"></div>
+        </div>
+
+        <button class="btn-primary" onclick="checkReport()">🔍 Analyze & Save Report</button>
         <button class="btn-secondary" onclick="clearForm()">🗑️ Clear</button>
+
+        <!-- patient history log -->
+        <div class="history-section">
+          <h4>🕒 Recent Patients (Local Storage)</h4>
+          <ul id="historyList"></ul>
+          <button class="btn-secondary" style="padding: 8px; font-size: 12px; margin-top: 10px;" onclick="clearHistory()">Clear History</button>
+        </div>
       </div>
 
-      <!--right: output results yahan dikhenge -->
+      <!-- right side: output results -->
       <div class="card result-card" id="printableArea">
         <div class="result-header">
           <h3>🩺 Clinical Analysis</h3>
           <p id="patientInfoDisplay">Patient Data Pending...</p>
         </div>
         
-        <!-- status batane wala banner (red, green ya yellow) -->
+        <!-- dynamic health score bar -->
+        <div class="score-container">
+          <h4>Overall Health Score: <span id="scoreText">--</span>/100</h4>
+          <div class="score-bar-bg">
+            <div id="scoreBarFill" class="score-bar-fill" style="width: 0%;"></div>
+          </div>
+        </div>
+
         <div id="statusBanner" class="status-banner">Awaiting test values...</div>
-        
-        <!-- dangerous combinations ka alert box -->
         <div id="warningBox" class="warning-box" style="display: none;"></div>
 
-        <!-- emergency action button -->
         <div id="actionPanel" class="action-panel" style="display: none;">
-          <button class="btn-action bg-red" onclick="alert('ICU Alert Sent to nearest terminal!')">🚨 Alert Emergency Ward</button>
-          <button class="btn-action bg-blue" onclick="alert('Referral Letter Drafted.')">📄 Generate Specialist Referral</button>
+          <button class="btn-action bg-red" onclick="alert('ICU/Specialist Alert Sent!')">🚨 Alert Emergency Ward</button>
         </div>
 
         <div class="details-section">
